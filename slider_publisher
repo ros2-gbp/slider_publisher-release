@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import rclpy
+import rospy
 import yaml
 import sys
 import os
@@ -10,19 +10,17 @@ from threading import Thread
 import signal
 from geometry_msgs.msg import Quaternion
 from functools import reduce
-from scipy.spatial.transform import Rotation
 from numpy import pi
+from tf.transformations import quaternion_from_euler
 
 RANGE = 1000
 
-def rsetattr(obj, attr, val, cast=True):
+def rsetattr(obj, attr, val):
     pre, _, post = attr.rpartition('.')
     if pre:
         return setattr(rgetattr(obj, pre), post, val)
-    if cast:
-        return setattr(obj, post, type(getattr(obj, post))(val))
-    else:
-        return setattr(obj, post, val)
+    # convert to expected field type
+    return setattr(obj, post, type(getattr(obj, post))(val))
 
 def rgetattr(obj, attr, *args):
     if attr == '':
@@ -31,21 +29,13 @@ def rgetattr(obj, attr, *args):
         return getattr(obj, attr, *args)
     return reduce(_getattr, [obj] + attr.split('.'))
 
-def quaternion_msg(rpy):
-    q = Rotation.from_euler('xyz',(rpy['roll'], rpy['pitch'], rpy['yaw'])).as_quat()
-    Q = Quaternion()
-    Q.x = q[0]
-    Q.y = q[1]
-    Q.z = q[2]
-    Q.w = q[3]
-    return Q
-
 def split_field(key):
     if '.' in key:
         return key.rsplit('.', 1)
     return '', key
 
 def isRPY(key, msg):
+    is_axis = False
     field, axis = split_field(key)
     if axis in ('roll', 'pitch', 'yaw'):
         return type(rgetattr(msg, field)) == Quaternion
@@ -59,7 +49,6 @@ def robust_eval(val):
         
         # check for  Pi fractions 
         for sign, sign_rep in ((1, ''), (-1, '-')):
-
             if val_expr == sign_rep + 'pi':
                 return sign*pi
             
@@ -74,12 +63,11 @@ def key_tag(topic, key):
     return topic + '/' + key
 
 class Publisher:
-    def __init__(self, node, topic, msg, info):
+    def __init__(self, topic, msg, info):
         self.topic = topic
         self.msg = msg()
-        self.pub = node.create_publisher(msg, topic, 10)
+        self.pub = rospy.Publisher(topic, msg, queue_size=1)
         self.rpy = {}
-        self.node = node
             
         # init map from GUI to message
         self.map = {}
@@ -108,19 +96,21 @@ class Publisher:
             info.pop(rm)
                            
     def write(self, key, val):
+        
         field, axis = split_field(key)
         if field in self.rpy:
             self.rpy[field][axis] = val
-        elif '[' in key:
+        elif '[' in key:        
             field, idx = key[:-1].split('[')
             idx = int(idx)
             current = rgetattr(self.msg, field)
             if len(current) <= idx:
-                default_val = 'name' in field and '' or 0
-                for _ in range(idx +1 - len(current)):
-                    current.append(default_val)
+                if 'name' in field:
+                    current += ['' for i in range(idx +1 - len(current))]
+                else:
+                    current += [0 for i in range(idx +1 - len(current))]
             current[idx] = val
-            rsetattr(self.msg, field, current, False)
+            rsetattr(self.msg, field, current)
         else:
             rsetattr(self.msg, key, val)
         
@@ -129,32 +119,28 @@ class Publisher:
             self.write(self.map[tag], values[tag]['val'])
         # write RPY's to Quaternions
         for field in self.rpy:
-            if field:
-                rsetattr(self.msg, field, quaternion_msg(self.rpy[field]), False)
-            else:
-                self.msg = quaternion_msg(self.rpy[field])
-
-        # update time if classical stamped msg
-        if hasattr(self.msg, 'header'):
-            self.write('header.stamp', self.node.get_clock().now().to_msg())        
-        elif hasattr(self.msg, 'stamp'):
-            self.write('stamp', self.node.get_clock().now().to_msg())  
+            q = quaternion_from_euler(self.rpy[field]['roll'],self.rpy[field]['pitch'], self.rpy[field]['yaw'])
+            for idx, axis in enumerate(('x','y','z','w')):
+                if field:
+                    rsetattr(self.msg, field + '.' + axis, q[idx])
+                else:
+                    setattr(self.msg, axis, q[idx])
+        # update time if stamped msg
+        if hasattr(self.msg, "header"):
+            self.write('header.stamp', rospy.Time.now())
         self.pub.publish(self.msg)
 
+
 class SliderPublisher(QWidget):
-    def __init__(self, node, content):
+    def __init__(self, content):
         super(SliderPublisher, self).__init__()
         
         content = content.replace('\t', '    ')
         
-        self.running = True
-        self.node = node
-                        
         # get message types
         self.publishers = {}
         self.values = {}
-        
-        self.timer = node.create_timer(0.1, self.publish)
+        pkgs = []
         
         # to keep track of key ordering in the yaml file
         order = []
@@ -162,9 +148,8 @@ class SliderPublisher(QWidget):
          
         for topic, info in yaml.safe_load(content).items():
             pkg,msg = info['type'].split('/')
-            pkg = __import__(pkg, globals(), locals(), ['msg'])
-            msg = getattr(pkg.msg, msg)
-            self.publishers[topic] = Publisher(node, topic, msg, info)
+            pkgs.append(__import__(pkg, globals(), locals(), ['msg']))
+            self.publishers[topic] = Publisher(topic, getattr(pkgs[-1].msg, msg), info)
             order.append((topic,[]))
             for key in info:
                 tag = key_tag(topic,key)
@@ -252,54 +237,39 @@ class SliderPublisher(QWidget):
         for key, key_info in self.key_map.items():
             key_info['slider'].setValue(int(RANGE/2))
         self.onValueChanged(event)
-                    
-    def publish(self):      
-        for pub in self.publishers:
-            self.publishers[pub].update(self.values)
             
-    def closeEvent(self, event):
-        self.running = False
         
-    def loop(self):
-        while self.running and rclpy.ok():
-            rclpy.spin_once(self.node, timeout_sec=0.1)
+    def loop(self):        
+        rate = rospy.Rate(10)
+        while not rospy.is_shutdown():
+            for pub in self.publishers:
+                self.publishers[pub].update(self.values)
+            rate.sleep()
             
-        if self.running:
-            self.node.destroy_node()
-            rclpy.shutdown()        
-        
-def main(args=None):
-           
-    rclpy.init(args=args)
-    node = rclpy.create_node('slider_publisher')
+if __name__ == "__main__":
     
-    # read passed param file
-    filename = len(sys.argv) > 1 and sys.argv[1] or ''
+    rospy.init_node('slider_publisher')
+    
+    # read passed param
+    filename = sys.argv[-1]
     if not os.path.exists(filename):
-        node.get_logger().error("did not get any configuration file, was '{}'".format(filename))
-        sys.exit(0)
+        if not rospy.has_param("~file"):
+            rospy.logerr("Pass a yaml file (~file param or argument)")
+            sys.exit(0)
+        filename = rospy.get_param("~file")
         
+    
     # also get order from file
     with open(filename) as f:
         content = f.read()
-
+                        
     # build GUI
-    full_namespace = '{}/{}'.format(node.get_namespace().strip('/'), node.get_name())
-    app = QApplication([full_namespace])    
-    sp = SliderPublisher(node, content)
+    title = rospy.get_name().split('/')[-1]
+    app = QApplication([title])    
+    sp = SliderPublisher(content)
+    #pause
+    Thread(target=sp.loop).start()
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+    sp.show()
+    sys.exit(app.exec_())
     
-    try:
-        Thread(target=sp.loop).start()
-        signal.signal(signal.SIGINT, signal.SIG_DFL)
-        sp.show()
-        app.exec_()
-        sp.running = False
-    except:
-        node.destroy_node()
-        rclpy.shutdown()
-    sp.running = False
-            
-            
-if __name__ == "__main__":
-    main()
- 
