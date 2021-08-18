@@ -1,20 +1,20 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package slider_publisher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-1.0.0 (2021-04-19)
+2.0.0 (2021-08-18)
 ------------------
-* Update README.md
-* baxter example
-* Remove dependency to sympy
-* empty lines
-* Python 3 compat
-* solve bug when multiple keys with same name
-* robust eval for numeric vs PI expressions
-* with RPY sliders
-* multiarray bug in some cases
-* fix init bug for arrays
+* add service and detects value type (float / int / bool)
+* can pick default value
 * Contributors: Olivier Kermorgant
+
+1.0.2 (2021-04-18)
+------------------
+* README typo
+* Contributors: Olivier Kermorgant
+
+1.0.0 (2020-06)
+------------------
+* ROS 2 branch
 
 0.1.1 (2017-11-23)
 ------------------
@@ -24,14 +24,9 @@ Changelog for package slider_publisher
 * Update README.md
 * topic paths
 * without python setup as its only an executable
-* now displays topicsin GUI
-* ok for arrays of float
-* Merge branch 'master' of github.com:oKermorgant/slider_publisher
-  README from GH
+* now displays topics in GUI
+* works for arrays of float
 * default timestamp if in message header
-* Update README.md
-* Update README.md
-* Update README.md
 * more README
 * initial commit
 * Contributors: Olivier Kermorgant
