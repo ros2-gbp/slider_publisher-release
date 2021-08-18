@@ -1,14 +1,20 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package slider_publisher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-1.0.0 (2020-06)
+2.0.0 (2021-08-18)
 ------------------
-* ROS 2 branch
+* add service and detects value type (float / int / bool)
+* can pick default value
+* Contributors: Olivier Kermorgant
 
 1.0.2 (2021-04-18)
 ------------------
 * README typo
 * Contributors: Olivier Kermorgant
+
+1.0.0 (2020-06)
+------------------
+* ROS 2 branch
 
 0.1.1 (2017-11-23)
 ------------------
