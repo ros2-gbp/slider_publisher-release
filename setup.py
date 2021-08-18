@@ -6,7 +6,7 @@ package_name = 'slider_publisher'
 
 setup(
     name=package_name,
-    version='1.0.0',
+    version='1.0.2',
     # Packages to export
     packages=[package_name],
     # Files we want to install, specifically launch files
@@ -39,7 +39,8 @@ setup(
     # scripts here.
     entry_points={
         'console_scripts': [
-            'slider_publisher = slider_publisher.slider_publisher:main'
+            'slider_publisher = slider_publisher.slider_publisher:main',
+            'dummy_gazebo_server = slider_publisher.dummy_gazebo_server:main'
         ],
     },
 )
