@@ -1,0 +1,12 @@
+Source: ros-noetic-slider-publisher
+Section: misc
+Priority: optional
+Maintainer: Olivier Kermorgant <olivier.kermorgant@ec-nantes.fr>
+Build-Depends: debhelper (>= 9.0.0), ros-noetic-catkin, ros-noetic-rospy, ros-noetic-rqt-gui-py
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-noetic-slider-publisher
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-noetic-rospy, ros-noetic-rqt-gui-py
+Description: The slider_publisher package
