@@ -1,5 +1,5 @@
 int_msg:
-    type: example_interfaces/Int32
+    type: std_msgs/Int32
     int:
         to: data
         min: -20

@@ -1,25 +1,31 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package slider_publisher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2.0.1 (2021-08-19)
-------------------
-* bug in type detection for roll pitch yaw
-* Contributors: Olivier Kermorgant
 
-2.0.0 (2021-08-18)
+1.1.1 (2021-08-19)
 ------------------
-* add service and detects value type (float / int / bool)
+* allow service calls / different control for double,int,bool
 * can pick default value
 * Contributors: Olivier Kermorgant
 
-1.0.2 (2021-04-18)
+1.1.0 (2021-05-05)
 ------------------
-* README typo
+* bump cmake version to comply with policy CMP0048
 * Contributors: Olivier Kermorgant
 
-1.0.0 (2020-06)
+1.0.0 (2021-04-19)
 ------------------
-* ROS 2 branch
+* Update README.md
+* baxter example
+* Remove dependency to sympy
+* empty lines
+* Python 3 compat
+* solve bug when multiple keys with same name
+* robust eval for numeric vs PI expressions
+* with RPY sliders
+* multiarray bug in some cases
+* fix init bug for arrays
+* Contributors: Olivier Kermorgant
 
 0.1.1 (2017-11-23)
 ------------------
@@ -29,9 +35,12 @@ Changelog for package slider_publisher
 * Update README.md
 * topic paths
 * without python setup as its only an executable
-* now displays topics in GUI
-* works for arrays of float
+* now displays topicsin GUI
+* ok for arrays of float
+* Merge branch 'master' of github.com:oKermorgant/slider_publisher
+  README from GH
 * default timestamp if in message header
+* Update README.md
 * more README
 * initial commit
 * Contributors: Olivier Kermorgant
