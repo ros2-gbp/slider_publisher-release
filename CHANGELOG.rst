@@ -1,6 +1,11 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package slider_publisher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2.0.1 (2021-08-19)
+------------------
+* bug in type detection for roll pitch yaw
+* Contributors: Olivier Kermorgant
+
 2.0.0 (2021-08-18)
 ------------------
 * add service and detects value type (float / int / bool)
