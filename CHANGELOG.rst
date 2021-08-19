@@ -2,6 +2,17 @@
 Changelog for package slider_publisher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.1 (2021-08-19)
+------------------
+* allow service calls / different control for double,int,bool
+* can pick default value
+* Contributors: Olivier Kermorgant
+
+1.1.0 (2021-05-05)
+------------------
+* bump cmake version to comply with policy CMP0048
+* Contributors: Olivier Kermorgant
+
 1.0.0 (2021-04-19)
 ------------------
 * Update README.md
@@ -29,8 +40,6 @@ Changelog for package slider_publisher
 * Merge branch 'master' of github.com:oKermorgant/slider_publisher
   README from GH
 * default timestamp if in message header
-* Update README.md
-* Update README.md
 * Update README.md
 * more README
 * initial commit
