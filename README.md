@@ -1,3 +1,26 @@
+## slider_publisher (noetic) - 1.1.1-1
+
+The packages in the `slider_publisher` repository were released into the `noetic` distro by running `/usr/bin/bloom-release --ros-distro noetic --track noetic slider_publisher` on `Thu, 19 Aug 2021 09:36:34 -0000`
+
+The `slider_publisher` package was released.
+
+Version of package(s) in repository `slider_publisher`:
+
+- upstream repository: https://github.com/oKermorgant/slider_publisher.git
+- release repository: https://github.com/oKermorgant/slider_publisher-release.git
+- rosdistro version: `1.0.0-1`
+- old version: `1.0.0-1`
+- new version: `1.1.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.23`
+- rosdep version: `0.21.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## slider_publisher (foxy) - 2.0.1-1
 
 The packages in the `slider_publisher` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --ros-distro foxy --track foxy slider_publisher` on `Thu, 19 Aug 2021 09:28:17 -0000`
