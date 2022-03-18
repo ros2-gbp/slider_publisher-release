@@ -1,3 +1,26 @@
+## slider_publisher (rolling) - 2.1.0-1
+
+The packages in the `slider_publisher` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --ros-distro rolling --track rolling slider_publisher --edit` on `Fri, 18 Mar 2022 15:03:11 -0000`
+
+The `slider_publisher` package was released.
+
+Version of package(s) in repository `slider_publisher`:
+
+- upstream repository: https://github.com/oKermorgant/slider_publisher.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `2.1.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.24`
+- rosdep version: `0.21.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## slider_publisher (foxy) - 2.1.0-1
 
 The packages in the `slider_publisher` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --ros-distro foxy --track foxy slider_publisher` on `Fri, 18 Mar 2022 14:55:36 -0000`
