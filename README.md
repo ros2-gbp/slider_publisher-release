@@ -1,16 +1,16 @@
 # slider_publisher
 
-This package proposes a slider-based publisher node similar to the joint_state_publisher, but that can publish any type of message.
+This packages proposes a slider-based publisher node similar to the joint_state_publisher, but that can publish any message or service.
 
 Several examples are given:
-*   `roslaunch example.launch` for timestamped Twist (cmd_vel)
-*   `roslaunch example.launch file:=Twist.yaml` for non-timestamped Twist
-*   `roslaunch example.launch file:=VelPose.yaml` for 2 topics (Twist + Pose)
-*   `roslaunch example.launch file:=MultiArray.yaml` for a topic with 4 floats
-*   `roslaunch gazebo_service.launch` for a service call (uses `gazebo_msgs`)
+*   `ros2 launch example.launch` for timestamped Twist (cmd_vel)
+*   `ros2 launch example.launch file:=Twist.yaml` for non-timestamped Twist
+*   `ros2 launch example.launch file:=VelPose.yaml` for 2 topics (Twist + Pose)
+*   `ros2 launch example.launch file:=MultiArray.yaml` for a topic with 4 floats
+*   `ros2 launch gazebo_service.launch` for a service call (uses `gazebo_msgs`)
 
 Only numerical types or their derivatives can be publisher (ie there is no text input to change such value on-the-fly).
-Array-based messages are also possible for numerical values. 
+Array-based messages are also possible for numerical values.
 
 The packages reduces to a single node that has to be called with an argument leading to a YAML file with the following structure (examples corresponding to the VelPose.yaml file):
 
