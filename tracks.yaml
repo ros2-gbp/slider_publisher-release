@@ -1,4 +1,4 @@
-release_repo_url: https://github.com/ros2-gbp/slider_publisher-release
+release_repo_url: https://github.com/ros2-gbp/slider_publisher-release.git
 tracks:
   foxy:
     actions:
