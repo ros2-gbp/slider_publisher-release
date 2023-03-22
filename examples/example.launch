@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="file" default="TwistStamped.yaml"/>
+    <node pkg="slider_publisher" exec="slider_publisher" name="velocity" output="screen"
+          args="$(find-pkg-share slider_publisher)/examples/$(var file)">
+    </node>
+</launch>
