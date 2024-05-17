@@ -297,7 +297,13 @@ class Publisher:
             if type(info[label]) == dict:
 
                 if 'to' not in info[label]:
-                    info[label]['to'] = label
+                    fields = tuple(self.msg.get_fields_and_field_types().keys())
+                    if len(fields) == 1:
+                        info[label]['to'] = fields[0]
+                        Publisher.node.get_logger().info(f'Using "{fields[0]}" as destination only field for "{label}" on {topic}')
+                    else:
+                        info[label]['to'] = label
+                        Publisher.node.get_logger().info(f'Using "{label}" as destination field for "{label}" on {topic}')
 
                 if isRPY(info[label]['to'], self.msg):
                     field, axis = split_field(info[label]['to'])
