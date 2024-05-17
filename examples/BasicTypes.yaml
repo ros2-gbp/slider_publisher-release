@@ -5,16 +5,16 @@ bool_topic:
 int_topic:
     type: example_interfaces/Int32
     some_int:
-        to: data    # to min/max, text only
+        to: data    # no min/max, text only
         default: 4
 float_topic:
     type: example_interfaces/Float64
-    data:   # field name can be used here, no need for to:
+    some_float:   # field name can be used here, no need for to:
         min: -pi
         max: pi
 
 text_topic:
     type: example_interfaces/String
     message:
-        to: data
+        #to: data   data is the only field anyway
         default: 'hello world'
