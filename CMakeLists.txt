@@ -3,8 +3,7 @@ project(slider_publisher)
 
 find_package(ament_cmake REQUIRED)
 
-install(DIRECTORY
-        examples
+install(DIRECTORY examples
         DESTINATION share/${PROJECT_NAME})
 
 install(PROGRAMS src/slider_publisher
