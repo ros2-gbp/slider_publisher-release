@@ -1,11 +1,6 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package slider_publisher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2.4.0 (2024-05-17)
-------------------
-* no need to specify message field if there is only one
-* Contributors: Olivier Kermorgant
-
 2.3.1 (2023-12-16)
 ------------------
 * typo in readme
