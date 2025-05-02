@@ -1,3 +1,26 @@
+## slider_publisher (rolling) - 2.4.1-1
+
+The packages in the `slider_publisher` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --ros-distro rolling --track rolling slider_publisher` on `Fri, 02 May 2025 11:00:46 -0000`
+
+The `slider_publisher` package was released.
+
+Version of package(s) in repository `slider_publisher`:
+
+- upstream repository: https://github.com/oKermorgant/slider_publisher.git
+- release repository: https://github.com/ros2-gbp/slider_publisher-release.git
+- rosdistro version: `2.3.1-2`
+- old version: `2.3.1-2`
+- new version: `2.4.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.25.1`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## slider_publisher (jazzy) - 2.4.1-1
 
 The packages in the `slider_publisher` repository were released into the `jazzy` distro by running `/usr/bin/bloom-release --ros-distro jazzy --track jazzy slider_publisher` on `Fri, 02 May 2025 10:58:03 -0000`
