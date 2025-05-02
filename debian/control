@@ -1,0 +1,12 @@
+Source: ros-rolling-slider-publisher
+Section: misc
+Priority: optional
+Maintainer: Olivier Kermorgant <olivier.kermorgant@ec-nantes.fr>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake, ros-rolling-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-rolling-slider-publisher
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3-numpy, python3-scipy, ros-rolling-rqt-gui-py, ros-rolling-ros-workspace
+Description: This packages proposes a slider-based publisher node similar to the joint_state_publisher, but that can publish any type of message or call services.
