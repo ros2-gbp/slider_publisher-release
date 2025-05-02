@@ -1,3 +1,26 @@
+## slider_publisher (humble) - 2.4.1-1
+
+The packages in the `slider_publisher` repository were released into the `humble` distro by running `/usr/bin/bloom-release --ros-distro humble --track humble slider_publisher` on `Fri, 02 May 2025 10:55:17 -0000`
+
+The `slider_publisher` package was released.
+
+Version of package(s) in repository `slider_publisher`:
+
+- upstream repository: https://github.com/oKermorgant/slider_publisher.git
+- release repository: https://github.com/ros2-gbp/slider_publisher-release.git
+- rosdistro version: `2.4.0-1`
+- old version: `2.4.0-1`
+- new version: `2.4.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.25.1`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## slider_publisher (humble) - 2.4.0-1
 
 The packages in the `slider_publisher` repository were released into the `humble` distro by running `/usr/bin/bloom-release --ros-distro humble --track humble slider_publisher` on `Fri, 17 May 2024 12:24:18 -0000`
