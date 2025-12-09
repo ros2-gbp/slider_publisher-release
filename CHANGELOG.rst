@@ -1,9 +1,14 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package slider_publisher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2.4.2 (2025-12-09)
+------------------
+* remove numpy / scipy deps, we use basic maths here
+* Contributors: Olivier Kermorgant
+
 2.4.1 (2025-05-02)
 ------------------
-* add combobox for defalut value as list
+* add combobox for default value as list
 * Contributors: Olivier Kermorgant
 
 2.4.0 (2024-05-17)
